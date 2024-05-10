@@ -25,52 +25,54 @@ directory heirarchies, and Makefile targets.
 *   [x] Command (complete path)
 *     `/Users/phm/Software/bash-5.1.16/bin/bash`
 
-    cat $HOME/.bash_profile 
-    if [ "${BASH-no}" != "no" ]; then
-            [ -r $HOME/.bashrc ] && . $HOME/.bashrc
-    fi
+```
+cat $HOME/.bash_profile 
+if [ "${BASH-no}" != "no" ]; then
+        [ -r $HOME/.bashrc ] && . $HOME/.bashrc
+fi
 
-    cat ~/.bashrc
-    . ~/Scripts/bash-environment
+cat ~/.bashrc
+. ~/Scripts/bash-environment
 
 
-    cat ~/Scripts/bash-environment
-    # Write history after each command
-    _bash_history_append() {
-        builtin history -a
-    }
+cat ~/Scripts/bash-environment
+# Write history after each command
+_bash_history_append() {
+    builtin history -a
+}
 
-    _load_completion_file() {
-    declare -ra Array=( $HOME/Software/bash-*/share/bash-completion/bash_completion )
-    declare -r Complete="${Array[-1]}"
-    if ! shopt -oq posix; then
-      if [ -f "${Complete}" ]; then
-        . "${Complete}"
-      fi
-    fi
-    }
+_load_completion_file() {
+declare -ra Array=( $HOME/Software/bash-*/share/bash-completion/bash_completion )
+declare -r Complete="${Array[-1]}"
+if ! shopt -oq posix; then
+  if [ -f "${Complete}" ]; then
+    . "${Complete}"
+  fi
+fi
+}
 
-    _load_completion_file;
+_load_completion_file;
 
-    export EDITOR=nano
-    export VISUAL=nano
+export EDITOR=nano
+export VISUAL=nano
 
-    export PROMPT_DIRTRIM=4
-    export PROMPT_COMMAND=$'ERRCODE=$?;
-    if [ $ERRCODE -ne 0 ];
-    then ERRFLAG="\E[31;01merror = $ERRCODE\E[39;49;00m \n";
-    else ERRFLAG=;fi;
-    _bash_history_append; '
-    export PS1=$'${ERRFLAG}\[\e]2;\u@\h \w\a\]\[\e[31m\]\
-    `date +%Y-%m-%dT%H:%M:%S%:::z` \[\e[32m\]\u@\h\[\e[00m\]:\
-    \[\e[01;34m\]\w\[\e[00m\]\n\!> '
+export PROMPT_DIRTRIM=4
+export PROMPT_COMMAND=$'ERRCODE=$?;
+if [ $ERRCODE -ne 0 ];
+then ERRFLAG="\E[31;01merror = $ERRCODE\E[39;49;00m \n";
+else ERRFLAG=;fi;
+_bash_history_append; '
+export PS1=$'${ERRFLAG}\[\e]2;\u@\h \w\a\]\[\e[31m\]\
+`date +%Y-%m-%dT%H:%M:%S%:::z` \[\e[32m\]\u@\h\[\e[00m\]:\
+\[\e[01;34m\]\w\[\e[00m\]\n\!> '
 
-    for p in $HOME/Software/*/bin/ $HOME/bin/ ;
-    do [ -d "$p" ] && PATH="${p%/}:${PATH}" ;  
-    done
-    export PATH
+for p in $HOME/Software/*/bin/ $HOME/bin/ ;
+do [ -d "$p" ] && PATH="${p%/}:${PATH}" ;  
+done
+export PATH
 
-    for p in $HOME/Software/*/{man,share/man}/ ;
-    do [ -d "$p" ] && MANPATH="${p%/}:${MANPATH}" ;
-    done
-    export MANPATH
+for p in $HOME/Software/*/{man,share/man}/ ;
+do [ -d "$p" ] && MANPATH="${p%/}:${MANPATH}" ;
+done
+export MANPATH
+```
