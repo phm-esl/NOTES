@@ -759,11 +759,11 @@ Still getting errors:
 
     ./autogen.sh
 
-glib.mk:28: error: Libtool library used but 'LIBTOOL' is undefined
-glib.mk:28:   The usual way to define 'LIBTOOL' is to add 'LT_INIT'
-glib.mk:28:   to 'configure.ac' and run 'aclocal' and 'autoconf' again.
-glib.mk:28:   If 'LT_INIT' is in 'configure.ac', make sure
-glib.mk:28:   its definition is in aclocal's search path.
+    glib.mk:28: error: Libtool library used but 'LIBTOOL' is undefined
+    glib.mk:28:   The usual way to define 'LIBTOOL' is to add 'LT_INIT'
+    glib.mk:28:   to 'configure.ac' and run 'aclocal' and 'autoconf' again.
+    glib.mk:28:   If 'LT_INIT' is in 'configure.ac', make sure
+    glib.mk:28:   its definition is in aclocal's search path.
 
 Carrying on regardless:
 
@@ -1339,7 +1339,7 @@ Lots of warnings:
 
     make prefix="$HOME/Software/${PWD##*/}" install
 
-I give up! I can't buid Git with full documentation and internationalisation
+I give up! I can't build Git with full documentation and internationalisation
 
     cd ~/Builds/
     tar -xf ~/Downloads/git-2.37.1.tar 
@@ -1354,7 +1354,7 @@ I give up! I can't buid Git with full documentation and internationalisation
 
 
 
-# NMep
+# NMap
 
 https://nmap.org/download.html#source
 
