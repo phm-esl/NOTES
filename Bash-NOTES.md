@@ -22,8 +22,8 @@ directory heirarchies, and Makefile targets.
 
 * Terminal -> Preferences...
 * Shells open with:
-**   [*] Command (complete path)
-**     [/Users/phm/Software/bash-5.1.16/bin/bash]
+*   [*] Command (complete path)
+*     [/Users/phm/Software/bash-5.1.16/bin/bash]
 
     cat $HOME/.bash_profile 
     if [ "${BASH-no}" != "no" ]; then
