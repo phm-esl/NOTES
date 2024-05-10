@@ -9,7 +9,7 @@ This prevents:
 
 
 
-#Building OpenSSL
+# Building OpenSSL
 
 Source https://www.openssl.org/source/
 
@@ -28,65 +28,65 @@ Source https://www.openssl.org/source/
 
 
 
-#Building WX-Widgets
+# Building WX-Widgets
 
 Source https://wxwidgets.org/downloads/
 
-cd ~/Builds
-tar -zxf ~/Downloads/wxWidgets-3.1.6.tar.bz2
-cd wxWidgets-3.1.6
-./configure \
- --prefix=$HOME/Software/wxWidgets-3.1.6 \
- --enable-webview \
- --enable-compat28
-make clean && make -j 10 && make install
+    cd ~/Builds
+    tar -zxf ~/Downloads/wxWidgets-3.1.6.tar.bz2
+    cd wxWidgets-3.1.6
+    ./configure \
+     --prefix=$HOME/Software/wxWidgets-3.1.6 \
+     --enable-webview \
+     --enable-compat28
+    make clean && make -j 10 && make install
 
-The --enable-compat28 needed for OTP 23
-
-
+The `--enable-compat28` needed for OTP 23
 
 
-#Building Erlang/OTP
+
+
+# Building Erlang/OTP
 
 Source https://www.erlang.org/downloads
 
-mkdir ~/Builds
-cd ~/Builds
-tar -zxf ~/Downloads/otp_src_24.3.3
-cd otp_src_24.3.3
+    mkdir ~/Builds
+    cd ~/Builds
+    tar -zxf ~/Downloads/otp_src_24.3.3
+    cd otp_src_24.3.3
 
-export PATH="/Users/phm/Software/wxWidgets-3.1.6/bin\
-:/Users/phm/Software/openssl-3.0.2/bin\
-:$PATH"
+    export PATH="/Users/phm/Software/wxWidgets-3.1.6/bin\
+    :/Users/phm/Software/openssl-3.0.2/bin\
+    :$PATH"
 
-export CXX=/usr/bin/g++
+    export CXX=/usr/bin/g++
 
-./configure \
- --prefix=$HOME/Software/erlang-24.3.3 \
- --with-dynamic-trace=dtrace \
- --with-ssl=$HOME/Software/openssl-3.0.2 \
- --with-wxwidgets=$HOME/Software/wxWidgets-3.1.6 \
- --without-odbc \
- --without-javac \
- --enable-fips
+    ./configure \
+     --prefix=$HOME/Software/erlang-24.3.3 \
+     --with-dynamic-trace=dtrace \
+     --with-ssl=$HOME/Software/openssl-3.0.2 \
+     --with-wxwidgets=$HOME/Software/wxWidgets-3.1.6 \
+     --without-odbc \
+     --without-javac \
+     --enable-fips
 
-error: taking the address of a temporary object of type "'wxBitmap'"
+    error: taking the address of a temporary object of type "'wxBitmap'"
 
-export CXXFLAGS="-fpermissive"
+    export CXXFLAGS="-fpermissive"
 
-./configure \
- --prefix=$HOME/Software/erlang-24.3.3 \
- --with-dynamic-trace=dtrace \
- --with-ssl=$HOME/Software/openssl-3.0.2 \
- --without-wxwidgets \
- --without-odbc \
- --without-javac \
- --enable-fips
+    ./configure \
+     --prefix=$HOME/Software/erlang-24.3.3 \
+     --with-dynamic-trace=dtrace \
+     --with-ssl=$HOME/Software/openssl-3.0.2 \
+     --without-wxwidgets \
+     --without-odbc \
+     --without-javac \
+     --enable-fips
 
 
-configure: WARNING: ******************************************************************
-configure: WARNING: * Using OpenSSL 3.0 is not yet recommended for production code.  *
-configure: WARNING: ******************************************************************
+    configure: WARNING: ******************************************************************
+    configure: WARNING: * Using OpenSSL 3.0 is not yet recommended for production code.  *
+    configure: WARNING: ******************************************************************
 
 
 This seems to have disabled the 'crypto' and 'ssl' libraries.  It is claimed
@@ -94,129 +94,129 @@ that OpenSSL 3 is supported in Erlang/OTP 24, but the configure warning
 contradicts.
 
 
-make clean && make -j 10 && make install
+    make clean && make -j 10 && make install
 
 
 
 Trying again with OpenSSL-1.1.1o instead
 
-cd ~/Builds
-tar -xf ~/Downloads/openssl-1.1.1o.tar
-cd openssl-1.1.1o
-./config --prefix=$HOME/Software/openssl-1.1.1o
-make
-make test
-make install
+    cd ~/Builds
+    tar -xf ~/Downloads/openssl-1.1.1o.tar
+    cd openssl-1.1.1o
+    ./config --prefix=$HOME/Software/openssl-1.1.1o
+    make
+    make test
+    make install
 
 
 
-cd ~/Builds/otp_src_24.3.3
-./configure \
- --prefix=$HOME/Software/erlang-24.3.3 \
- --with-dynamic-trace=dtrace \
- --with-ssl=$HOME/Software/openssl-1.1.1o \
- --without-wxwidgets \
- --without-odbc \
- --without-javac \
- --enable-fips
+    cd ~/Builds/otp_src_24.3.3
+    ./configure \
+     --prefix=$HOME/Software/erlang-24.3.3 \
+     --with-dynamic-trace=dtrace \
+     --with-ssl=$HOME/Software/openssl-1.1.1o \
+     --without-wxwidgets \
+     --without-odbc \
+     --without-javac \
+     --enable-fips
 
-make clean && make -j 10 && make install
-
-
-
-
+    make clean && make -j 10 && make install
 
 
 
 
-cd ~/Repos
-git clone https://github.com/erlang/otpn GitHub-erlang-otp
-cd GitHub-erlang-otp
-git checkout -b phm OTP-24.3.3
-
-198> git diff
-diff --git a/lib/wx/c_src/gen/wxe_wrapper_5.cpp b/lib/wx/c_src/gen/wxe_wrapper_5.cpp
-index 43bda73ded..e66ee3720c 100644
---- a/lib/wx/c_src/gen/wxe_wrapper_5.cpp
-+++ b/lib/wx/c_src/gen/wxe_wrapper_5.cpp
-@@ -2162,7 +2162,11 @@ void wxMenuItem_GetBitmap(WxeApp *app, wxeMemEnv *memenv, wxeCommand& Ecmd)
-   wxMenuItem *This;
-   This = (wxMenuItem *) memenv->getPtr(env, argv[0], "This");
-   if(!This) throw wxe_badarg("This");
--  const wxBitmap * Result = &This->GetBitmap();
-+  // phm fix for:-
-+  // "error: taking address of a temporary object of type wxBitmap"
-+  // Using the variable Tmp to avoid taking address of temporary
-+  const wxBitmap Tmp = This->GetBitmap();
-+  const wxBitmap * Result = &Tmp;
-   wxeReturn rt = wxeReturn(memenv, Ecmd.caller, true);
-   rt.send(  rt.make_ref(app->getRef((void *)Result,memenv), "wxBitmap"));
- 
-diff --git a/lib/wx/c_src/gen/wxe_wrapper_7.cpp b/lib/wx/c_src/gen/wxe_wrapper_7.cpp
-index f4716e1228..f06517541b 100644
---- a/lib/wx/c_src/gen/wxe_wrapper_7.cpp
-+++ b/lib/wx/c_src/gen/wxe_wrapper_7.cpp
-@@ -2339,7 +2339,13 @@ void wxToolBar_AddTool_4(WxeApp *app, wxeMemEnv *memenv, wxeCommand& Ecmd)
-     } else        Badarg("Options");
-   };
-   if(!This) throw wxe_badarg("This");
--  wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
-+  // phm fix:-
-+  // "error: call to member function 'AddTool' is ambiguous"
-+  // Using arguments that match "the full AddTool function"
-+  // as described in wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h
-+  // to remove ambiguity.
-+  wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(
-+    toolId,label,*bitmap,wxBitmapBundle(),kind,shortHelp);
-   wxeReturn rt = wxeReturn(memenv, Ecmd.caller, true);
-   rt.send(  rt.make_ref(app->getRef((void *)Result,memenv), "wx"));
 
 
 
 
-export PATH="/Users/phm/Software/wxWidgets-3.1.6/bin\
-:/Users/phm/Software/openssl-1.1.1o/bin\
-:$PATH"
-./otp_build setup -a --prefix=$HOME/Software/erlang-24.3.3 \
---with-ssl=$HOME/Software/openssl-1.1.1o
+    cd ~/Repos
+    git clone https://github.com/erlang/otpn GitHub-erlang-otp
+    cd GitHub-erlang-otp
+    git checkout -b phm OTP-24.3.3
+
+    198> git diff
+    diff --git a/lib/wx/c_src/gen/wxe_wrapper_5.cpp b/lib/wx/c_src/gen/wxe_wrapper_5.cpp
+    index 43bda73ded..e66ee3720c 100644
+    --- a/lib/wx/c_src/gen/wxe_wrapper_5.cpp
+    +++ b/lib/wx/c_src/gen/wxe_wrapper_5.cpp
+    @@ -2162,7 +2162,11 @@ void wxMenuItem_GetBitmap(WxeApp *app, wxeMemEnv *memenv, wxeCommand& Ecmd)
+       wxMenuItem *This;
+       This = (wxMenuItem *) memenv->getPtr(env, argv[0], "This");
+       if(!This) throw wxe_badarg("This");
+    -  const wxBitmap * Result = &This->GetBitmap();
+    +  // phm fix for:-
+    +  // "error: taking address of a temporary object of type wxBitmap"
+    +  // Using the variable Tmp to avoid taking address of temporary
+    +  const wxBitmap Tmp = This->GetBitmap();
+    +  const wxBitmap * Result = &Tmp;
+       wxeReturn rt = wxeReturn(memenv, Ecmd.caller, true);
+       rt.send(  rt.make_ref(app->getRef((void *)Result,memenv), "wxBitmap"));
+     
+    diff --git a/lib/wx/c_src/gen/wxe_wrapper_7.cpp b/lib/wx/c_src/gen/wxe_wrapper_7.cpp
+    index f4716e1228..f06517541b 100644
+    --- a/lib/wx/c_src/gen/wxe_wrapper_7.cpp
+    +++ b/lib/wx/c_src/gen/wxe_wrapper_7.cpp
+    @@ -2339,7 +2339,13 @@ void wxToolBar_AddTool_4(WxeApp *app, wxeMemEnv *memenv, wxeCommand& Ecmd)
+         } else        Badarg("Options");
+       };
+       if(!This) throw wxe_badarg("This");
+    -  wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
+    +  // phm fix:-
+    +  // "error: call to member function 'AddTool' is ambiguous"
+    +  // Using arguments that match "the full AddTool function"
+    +  // as described in wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h
+    +  // to remove ambiguity.
+    +  wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(
+    +    toolId,label,*bitmap,wxBitmapBundle(),kind,shortHelp);
+       wxeReturn rt = wxeReturn(memenv, Ecmd.caller, true);
+       rt.send(  rt.make_ref(app->getRef((void *)Result,memenv), "wx"));
+
+
+
+
+    export PATH="/Users/phm/Software/wxWidgets-3.1.6/bin\
+    :/Users/phm/Software/openssl-1.1.1o/bin\
+    :$PATH"
+    ./otp_build setup -a --prefix=$HOME/Software/erlang-24.3.3 \
+    --with-ssl=$HOME/Software/openssl-1.1.1o
 
 The above otp_build fails.  Apply the two file patches to the tar source,
 and try yet again:
 
 
-cp lib/wx/c_src/gen/wxe_wrapper_{5,7}.cpp \
-~/Builds/otp_src_24.3.3/lib/wx/c_src/gen/
+    cp lib/wx/c_src/gen/wxe_wrapper_{5,7}.cpp \
+    ~/Builds/otp_src_24.3.3/lib/wx/c_src/gen/
 
-cd ~/Builds/otp_src_24.3.3/
-make clean
-./configure \
- --prefix=$HOME/Software/erlang-24.3.3 \
- --with-dynamic-trace=dtrace \
- --with-ssl=$HOME/Software/openssl-1.1.1o \
- --without-odbc \
- --without-javac \
- --enable-fips
+    cd ~/Builds/otp_src_24.3.3/
+    make clean
+    ./configure \
+     --prefix=$HOME/Software/erlang-24.3.3 \
+     --with-dynamic-trace=dtrace \
+     --with-ssl=$HOME/Software/openssl-1.1.1o \
+     --without-odbc \
+     --without-javac \
+     --enable-fips
 
-*********************************************************************
-**********************  APPLICATIONS DISABLED  **********************
-*********************************************************************
+    *********************************************************************
+    **********************  APPLICATIONS DISABLED  **********************
+    *********************************************************************
 
-jinterface     : Java compiler disabled by user
-odbc           : User gave --without-odbc option
+    jinterface     : Java compiler disabled by user
+    odbc           : User gave --without-odbc option
 
-*********************************************************************
-*********************************************************************
-**********************  DOCUMENTATION INFORMATION  ******************
-*********************************************************************
+    *********************************************************************
+    *********************************************************************
+    **********************  DOCUMENTATION INFORMATION  ******************
+    *********************************************************************
 
-documentation  : 
-                 fop is missing.
-                 Using fakefop to generate placeholder PDF files.
+    documentation  : 
+                     fop is missing.
+                     Using fakefop to generate placeholder PDF files.
 
-*********************************************************************
+    *********************************************************************
 
-make
-make install
+    make
+    make install
 
 
 
@@ -224,31 +224,31 @@ make install
 The compilation errors that the two source file patches manage to work around:
 
 
-gen/wxe_wrapper_5.cpp:2165:29: error: taking the address of a temporary 
-object of type 'wxBitmap' [-Waddress-of-temporary]
-  const wxBitmap * Result = &This->GetBitmap();
-                            ^~~~~~~~~~~~~~~~~~
-1 warning and 1 error generated.
-make[3]: *** [aarch64-apple-darwin21.4.0/wxe_wrapper_5.o] Error 1
-make[2]: *** [opt] Error 2
-make[1]: *** [opt] Error 2
-make: *** [libs] Error 2
+    gen/wxe_wrapper_5.cpp:2165:29: error: taking the address of a temporary 
+    object of type 'wxBitmap' [-Waddress-of-temporary]
+      const wxBitmap * Result = &This->GetBitmap();
+                                ^~~~~~~~~~~~~~~~~~
+    1 warning and 1 error generated.
+    make[3]: *** [aarch64-apple-darwin21.4.0/wxe_wrapper_5.o] Error 1
+    make[2]: *** [opt] Error 2
+    make[1]: *** [opt] Error 2
+    make: *** [libs] Error 2
 
 
 
-gen/wxe_wrapper_7.cpp:2342:58: error: call to member function 'AddTool' is 
-ambiguous
-  wxToolBarToolBase * Result = 
-(wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
-                                                   ~~~~~~^~~~~~~
-/Users/phm/Software/wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h:311:24: 
-note: candidate function
-    wxToolBarToolBase *AddTool(int toolid,
-                       ^
-/Users/phm/Software/wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h:527:24: 
-note: candidate function
-    wxToolBarToolBase *AddTool(int toolid,
-                       ^
+    gen/wxe_wrapper_7.cpp:2342:58: error: call to member function 'AddTool' is 
+    ambiguous
+      wxToolBarToolBase * Result = 
+    (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
+                                                       ~~~~~~^~~~~~~
+    /Users/phm/Software/wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h:311:24: 
+    note: candidate function
+        wxToolBarToolBase *AddTool(int toolid,
+                           ^
+    /Users/phm/Software/wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h:527:24: 
+    note: candidate function
+        wxToolBarToolBase *AddTool(int toolid,
+                           ^
 
 
 
@@ -256,90 +256,90 @@ note: candidate function
 
 
 
-Build and install Elixir
+# Build and install Elixir
 
-tar -zxf ~/Downloads/elixir-1.13.4.tar 
-cd elixir-1.13.4/
-make PREFIX=/Users/phm/Software/erlang-24.3.3 
-make PREFIX=/Users/phm/Software/erlang-24.3.3 install
+    tar -zxf ~/Downloads/elixir-1.13.4.tar 
+    cd elixir-1.13.4/
+    make PREFIX=/Users/phm/Software/erlang-24.3.3 
+    make PREFIX=/Users/phm/Software/erlang-24.3.3 install
 
 
 Following instructions from Deploying Elixir by Miguel Cobá,
 section Install Phoenix:
 
-mkdir ~/tmp && cd ~/tmp
+    mkdir ~/tmp && cd ~/tmp
 
-483> mix local.rebar --force
-* creating /Users/phm/.mix/rebar
-* creating /Users/phm/.mix/rebar3
+    483> mix local.rebar --force
+    * creating /Users/phm/.mix/rebar
+    * creating /Users/phm/.mix/rebar3
 
-484> mix local.hex --force
-* creating /Users/phm/.mix/archives/hex-1.0.1
+    484> mix local.hex --force
+    * creating /Users/phm/.mix/archives/hex-1.0.1
 
-# using installation recipe from phoenixframework.org, not the book:
-486> mix archive.install hex phx_new
-Resolving Hex dependencies...
-Dependency resolution completed:
-New:
-  phx_new 1.6.9
-* Getting phx_new (Hex package)
-All dependencies are up to date
-Compiling 11 files (.ex)
-Generated phx_new app
-Generated archive "phx_new-1.6.9.ez" with MIX_ENV=prod
-Are you sure you want to install "phx_new-1.6.9.ez"? [Yn] y
-* creating /Users/phm/.mix/archives/phx_new-1.6.9
+    # using installation recipe from phoenixframework.org, not the book:
+    486> mix archive.install hex phx_new
+    Resolving Hex dependencies...
+    Dependency resolution completed:
+    New:
+      phx_new 1.6.9
+    * Getting phx_new (Hex package)
+    All dependencies are up to date
+    Compiling 11 files (.ex)
+    Generated phx_new app
+    Generated archive "phx_new-1.6.9.ez" with MIX_ENV=prod
+    Are you sure you want to install "phx_new-1.6.9.ez"? [Yn] y
+    * creating /Users/phm/.mix/archives/phx_new-1.6.9
 
-487> mix phx.new demo --live
-* creating demo/config/config.exs
-* creating demo/config/dev.exs
-* creating demo/config/prod.exs
-* creating demo/config/runtime.exs
-* creating demo/config/test.exs
-* creating demo/lib/demo/application.ex
-* creating demo/lib/demo.ex
-* creating demo/lib/demo_web/views/error_helpers.ex
-* creating demo/lib/demo_web/views/error_view.ex
-* creating demo/lib/demo_web/endpoint.ex
-* creating demo/lib/demo_web/router.ex
-* creating demo/lib/demo_web/telemetry.ex
-* creating demo/lib/demo_web.ex
-* creating demo/mix.exs
-* creating demo/README.md
-* creating demo/.formatter.exs
-* creating demo/.gitignore
-* creating demo/test/support/conn_case.ex
-* creating demo/test/test_helper.exs
-* creating demo/test/demo_web/views/error_view_test.exs
-* creating demo/lib/demo/repo.ex
-* creating demo/priv/repo/migrations/.formatter.exs
-* creating demo/priv/repo/seeds.exs
-* creating demo/test/support/data_case.ex
-* creating demo/lib/demo_web/controllers/page_controller.ex
-* creating demo/lib/demo_web/views/page_view.ex
-* creating demo/test/demo_web/controllers/page_controller_test.exs
-* creating demo/test/demo_web/views/page_view_test.exs
-* creating demo/assets/vendor/topbar.js
-* creating demo/lib/demo_web/templates/layout/root.html.heex
-* creating demo/lib/demo_web/templates/layout/app.html.heex
-* creating demo/lib/demo_web/templates/layout/live.html.heex
-* creating demo/lib/demo_web/views/layout_view.ex
-* creating demo/lib/demo_web/templates/page/index.html.heex
-* creating demo/test/demo_web/views/layout_view_test.exs
-* creating demo/lib/demo/mailer.ex
-* creating demo/lib/demo_web/gettext.ex
-* creating demo/priv/gettext/en/LC_MESSAGES/errors.po
-* creating demo/priv/gettext/errors.pot
-* creating demo/assets/css/phoenix.css
-* creating demo/assets/css/app.css
-* creating demo/assets/js/app.js
-* creating demo/priv/static/robots.txt
-* creating demo/priv/static/images/phoenix.png
-* creating demo/priv/static/favicon.ico
+    487> mix phx.new demo --live
+    * creating demo/config/config.exs
+    * creating demo/config/dev.exs
+    * creating demo/config/prod.exs
+    * creating demo/config/runtime.exs
+    * creating demo/config/test.exs
+    * creating demo/lib/demo/application.ex
+    * creating demo/lib/demo.ex
+    * creating demo/lib/demo_web/views/error_helpers.ex
+    * creating demo/lib/demo_web/views/error_view.ex
+    * creating demo/lib/demo_web/endpoint.ex
+    * creating demo/lib/demo_web/router.ex
+    * creating demo/lib/demo_web/telemetry.ex
+    * creating demo/lib/demo_web.ex
+    * creating demo/mix.exs
+    * creating demo/README.md
+    * creating demo/.formatter.exs
+    * creating demo/.gitignore
+    * creating demo/test/support/conn_case.ex
+    * creating demo/test/test_helper.exs
+    * creating demo/test/demo_web/views/error_view_test.exs
+    * creating demo/lib/demo/repo.ex
+    * creating demo/priv/repo/migrations/.formatter.exs
+    * creating demo/priv/repo/seeds.exs
+    * creating demo/test/support/data_case.ex
+    * creating demo/lib/demo_web/controllers/page_controller.ex
+    * creating demo/lib/demo_web/views/page_view.ex
+    * creating demo/test/demo_web/controllers/page_controller_test.exs
+    * creating demo/test/demo_web/views/page_view_test.exs
+    * creating demo/assets/vendor/topbar.js
+    * creating demo/lib/demo_web/templates/layout/root.html.heex
+    * creating demo/lib/demo_web/templates/layout/app.html.heex
+    * creating demo/lib/demo_web/templates/layout/live.html.heex
+    * creating demo/lib/demo_web/views/layout_view.ex
+    * creating demo/lib/demo_web/templates/page/index.html.heex
+    * creating demo/test/demo_web/views/layout_view_test.exs
+    * creating demo/lib/demo/mailer.ex
+    * creating demo/lib/demo_web/gettext.ex
+    * creating demo/priv/gettext/en/LC_MESSAGES/errors.po
+    * creating demo/priv/gettext/errors.pot
+    * creating demo/assets/css/phoenix.css
+    * creating demo/assets/css/app.css
+    * creating demo/assets/js/app.js
+    * creating demo/priv/static/robots.txt
+    * creating demo/priv/static/images/phoenix.png
+    * creating demo/priv/static/favicon.ico
 
-Fetch and install dependencies? [Yn] 
-* running mix deps.get
-* running mix deps.compile
+    Fetch and install dependencies? [Yn] 
+    * running mix deps.get
+    * running mix deps.compile
 
 We are almost there! The following steps are missing:
 
@@ -358,67 +358,69 @@ You can also run your app inside IEx (Interactive Elixir) as:
     $ iex -S mix phx.server
 
 
-488> cd demo
+    488> cd demo
 
 
 
 
 
 
-Build and install GNU Make 4.3
+# Build and install GNU Make 4.3
 
 
-tar -xf ~/Downloads/make-4.3.tar
-./configure --prefix=$HOME/Software/make-4.3
-make
-make install
-
-
-
+    tar -xf ~/Downloads/make-4.3.tar
+    ./configure --prefix=$HOME/Software/make-4.3
+    make
+    make install
 
 
 
 
 
-Build and install GNU Grep 3.7
+
+
+
+# Build and install GNU Grep 3.7
+
 MacOS only provides BSD grep 2.6.0-FreeBSD
 
-cd ~/Builds
-tar -xf ~/Downloads/grep-3.7.tar 
-cd grep-3.7/
-./configure --help
-./configure --prefix=$HOME/Software/grep-3.7
-make 
-make install
+    cd ~/Builds
+    tar -xf ~/Downloads/grep-3.7.tar 
+    cd grep-3.7/
+    ./configure --help
+    ./configure --prefix=$HOME/Software/grep-3.7
+    make 
+    make install
 
 
 
 
-Build and install ncurses
+# Build and install ncurses
+
 The configure option --enable-widec enables UTF8
 
 https://invisible-island.net/ncurses/ncurses.faq.html
 
-cd ~/Builds
-tar -xf ~/Downloads/ncurses-6.3.tar 
-cd ./ncurses-6.3/
-./configure --prefix=$HOME/Software/ncurses-6.3 --enable-widec
-make clean && make && make install
+    cd ~/Builds
+    tar -xf ~/Downloads/ncurses-6.3.tar 
+    cd ./ncurses-6.3/
+    ./configure --prefix=$HOME/Software/ncurses-6.3 --enable-widec
+    make clean && make && make install
 
 
-Build and install nano editor
+# Build and install nano editor
 
-cd ~/Builds
-tar -xf ~/Downloads/ncurses-6.3.tar 
-cd ncurses-6.3/
-export LDFLAGS="-L$HOME/Software/ncurses-6.3/lib"
-./configure --prefix=$HOME/Software/nano-6.3
-make && make install
-
-
+    cd ~/Builds
+    tar -xf ~/Downloads/ncurses-6.3.tar 
+    cd ncurses-6.3/
+    export LDFLAGS="-L$HOME/Software/ncurses-6.3/lib"
+    ./configure --prefix=$HOME/Software/nano-6.3
+    make && make install
 
 
-Note to self: need to populate the LDFLAGS environment
+
+
+Note to self: need to populate the `LDFLAGS` environment
 parameter from the $HOME/Software/*/lib/ directories.
 
 
@@ -427,7 +429,7 @@ parameter from the $HOME/Software/*/lib/ directories.
 
 
 
-Build and install PostgreSQL
+# Build and install PostgreSQL
 
 Download source code location:
     https://ftp.postgresql.org/pub/source/v14.3/postgresql-14.3.tar.bz2
@@ -512,7 +514,7 @@ Start DB server as instructed:
 
 
 
-#Copenhagen Project
+# Copenhagen Project
 
 The Copenhagen Project source code has dependency requirements. One is the
 PostGIS extension, which in turn depends on:
@@ -527,7 +529,7 @@ PostGIS extension, which in turn depends on:
 
 
 
-#Build and install CMake
+# Build and install CMake
 
 Required for building libgeos.org, that in turn is required for
 PostGIS.net...
@@ -547,7 +549,7 @@ Start a new shell to refresh the $PATH:
 
 
 
-#Build and install libgeos
+# Build and install libgeos
 
     cd ~/Builds
     tar -jxf ~/Downloads/geos-3.10.3.tar.bz2 
@@ -577,7 +579,7 @@ files can be found by the PostGIS build.
 
 
 
-#Build and install proj.org
+# Build and install proj.org
 
 The Cmake build system introduced with version proj-9.0.1 is broken, for me. 
 The previous proj-8.2.1 uses GNU autotools to build, which succeeds on Apple
@@ -629,7 +631,7 @@ Sqlite3 libraries.
 
 
 
-#Build and install gdal.org
+# Build and install gdal.org
 
 Avoiding GDAL version 3.5 because of an experimental CMake-based build.
 
@@ -643,7 +645,7 @@ Avoiding GDAL version 3.5 because of an experimental CMake-based build.
 
 
 
-#Build and install LibXML2
+# Build and install LibXML2
 
 No comment: like falling off a log...
 
@@ -656,7 +658,7 @@ No comment: like falling off a log...
 
 
 
-#Build and install JSON-C
+# Build and install JSON-C
 
 Collect a tagged version as a source code archive.
 
@@ -679,7 +681,7 @@ according to the `--prefix` option spec.
 
 
 
-#Build and install GNU Autoconf
+# Build and install GNU Autoconf
 
 The `protobuf-c` tagged source archive needs `autoreconf`: 
 
@@ -693,7 +695,7 @@ The `protobuf-c` tagged source archive needs `autoreconf`:
 
 
 
-#Build and install GNU Automake
+# Build and install GNU Automake
 
 The `autoreconf` tool needs `aclocal`
 
@@ -705,7 +707,7 @@ The `autoreconf` tool needs `aclocal`
     make install
 
 
-#Build and install GNU Libtool
+# Build and install GNU Libtool
 
 The `aclocal` tool needs `libtool`... and on and on and on... The
 installation of `aclocal` and `libtool` provided with Apple Xcode is
@@ -716,11 +718,11 @@ incomplete, missing `libtoolize`
 
 This will fix the following message from `protobuf-c-1.4.0/autogen.ac`
 
-Makefile.am:4: error: Libtool library used but 'LIBTOOL' is undefined
-Makefile.am:4:   The usual way to define 'LIBTOOL' is to add 'LT_INIT'
-Makefile.am:4:   to 'configure.ac' and run 'aclocal' and 'autoconf' again.
-Makefile.am:4:   If 'LT_INIT' is in 'configure.ac', make sure
-Makefile.am:4:   its definition is in aclocal's search path.
+    Makefile.am:4: error: Libtool library used but 'LIBTOOL' is undefined
+    Makefile.am:4:   The usual way to define 'LIBTOOL' is to add 'LT_INIT'
+    Makefile.am:4:   to 'configure.ac' and run 'aclocal' and 'autoconf' again.
+    Makefile.am:4:   If 'LT_INIT' is in 'configure.ac', make sure
+    Makefile.am:4:   its definition is in aclocal's search path.
 
 The `ACLOCAL_PATH` environment variable might be relevant. Keeping note of
 it here:
@@ -730,23 +732,23 @@ it here:
 
 
 
-#Build and install pkg-config
+# Build and install pkg-config
 
     cd ~/Builds/
     tar -xf ~/Downloads/pkg-config-pkg-config-0.29.2.tar.gz 
     cd pkg-config-pkg-config-0.29.2/
 
-libtoolize: putting auxiliary files in '.'.
-libtoolize: linking file './ltmain.sh'
-libtoolize: You should add the contents of the following files to 'aclocal.m4':
-libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/libtool.m4'
-libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/ltoptions.m4'
-libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/ltsugar.m4'
-libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/ltversion.m4'
-libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/lt~obsolete.m4'
-libtoolize: Consider adding 'AC_CONFIG_MACRO_DIRS([m4])' to configure.ac,
-libtoolize: and rerunning libtoolize and aclocal.
-libtoolize: Consider adding '-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
+    libtoolize: putting auxiliary files in '.'.
+    libtoolize: linking file './ltmain.sh'
+    libtoolize: You should add the contents of the following files to 'aclocal.m4':
+    libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/libtool.m4'
+    libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/ltoptions.m4'
+    libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/ltsugar.m4'
+    libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/ltversion.m4'
+    libtoolize:   '/Users/phm/Software/libtool-2.4.6/share/aclocal/lt~obsolete.m4'
+    libtoolize: Consider adding 'AC_CONFIG_MACRO_DIRS([m4])' to configure.ac,
+    libtoolize: and rerunning libtoolize and aclocal.
+    libtoolize: Consider adding '-I m4' to ACLOCAL_AMFLAGS in Makefile.am.
 
 
     aclocal
@@ -777,7 +779,7 @@ I will build PostGIS without protobuf, after all...
 
 
 
-#Build and install protobuf-c
+# Build and install protobuf-c
 
 Needs GNU Automake and Autoconf
 
@@ -798,12 +800,12 @@ https://github.com/protobuf-c/protobuf-c/tags
 
 
 
-#Build and install PostGIS
+# Build and install PostGIS
 
 NOTE: Version postgis-3.2.1 has build problems on Mac M1 ARM64
 
- * https://groups.google.com/g/postgis-users/c/EzbXR8GFOKw
- * https://trac.osgeo.org/postgis/ticket/5091
+* https://groups.google.com/g/postgis-users/c/EzbXR8GFOKw
+* https://trac.osgeo.org/postgis/ticket/5091
 
 Using postgis-3.1.5 instead.
 
@@ -859,7 +861,7 @@ This should solve the following error:
 
 
 
-#Kashet build requirements
+# Kashet build requirements
 
 
 
@@ -874,7 +876,7 @@ First Kashet failure: the `Makefile` strictly specifies `python3.9`, but MacOS o
 provides `python3` with version 3.8.9. Installing Python-3.9 from source...
 
 
-##Python3.9
+## Python3.9
 
     cd ~/Builds
     tar -xf ~/Downloads/Python-3.9.13.tar 
@@ -900,7 +902,7 @@ Second Kashet failure:
 Installing PyYAML, and its dependency LibYAML...
 
 
-##PyYAML module
+## PyYAML module
 
 Requires LibYAML as dependency.
 
@@ -1041,7 +1043,7 @@ Running a specific node in a local container:
 
 
 
-#Python version 3.10
+# Python version 3.10
 
 Date: 2022-07-11
 
@@ -1063,7 +1065,7 @@ New terminal to refresh `$PATH` etc. to add LibYAML.
     python3.10 ./setup.py install
 
 
-#OTP/Erlang version 25
+# OTP/Erlang version 25
 
 Date: 2022-07-12
 
@@ -1120,7 +1122,7 @@ Build and install Elixir
 
 
 
-#GNU findutils
+# GNU findutils
 
 Depends on `xz` to decompress the source archive:
 
@@ -1140,7 +1142,7 @@ New shell to refresh `$PATH`
     make && make install
 
 
-#GNU sed
+# GNU sed
 
     cd ~/Builds/
     xz -d ~/Downloads/sed-4.8.tar.xz 
@@ -1158,7 +1160,7 @@ New shell to refresh `$PATH`
 
 
 
-#Git-SCM
+# Git-SCM
 
 Date 2022-08-01
 
@@ -1182,7 +1184,7 @@ The above last two lines as described in the `INSTALL` file:
 
 
 
-##Asciidoc
+## Asciidoc
 
 Installing from PyPI
 
@@ -1194,7 +1196,7 @@ by doing the following:
 
 
 
-##Gettext
+## Gettext
 
 There a couple of dependencies on gettext and libintl in Xmlto and Getopt
 
@@ -1206,7 +1208,7 @@ There a couple of dependencies on gettext and libintl in Xmlto and Getopt
     make install
 
 
-##Getopt
+## Getopt
 
 Needed to build xmlto. Missing `getopt`
 "You need getopt from <http://software.frodo.looijaard.name/getopt/>".
@@ -1243,7 +1245,7 @@ Build sequence:
 
 
 
-##Xmlto
+## Xmlto
 
 Source archive https://releases.pagure.org/xmlto/
 
@@ -1254,7 +1256,7 @@ Source archive https://releases.pagure.org/xmlto/
     make
     make install
 
-##Docbook2x
+## Docbook2x
 
     cd ~/Builds/
     tar -xf ~/Downloads/docbook2X-0.8.8.tar 
@@ -1264,7 +1266,7 @@ Source archive https://releases.pagure.org/xmlto/
     make install
 
 
-##XSL style sheet catalog
+## XSL style sheet catalog
 
 https://www.linuxfromscratch.org/blfs/view/8.1/pst/docbook-xsl.html
 
@@ -1274,67 +1276,68 @@ https://www.linuxfromscratch.org/blfs/view/8.1/pst/docbook-xsl.html
 
     install -v -m755 -d "$HOME/Software/${PWD##*/}"
 
-cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
+    cp -v -R VERSION assembly common eclipse epub epub3 extensions fo    \
          highlighting html htmlhelp images javahelp lib manpages params  \
          profiling roundtrip slides template tests tools webhelp website \
          xhtml xhtml-1_1 xhtml5                                          \
          "$HOME/Software/${PWD##*/}"
 
-ln -s VERSION "$HOME/Software/${PWD##*/}/VERSION.xsl"
+    ln -s VERSION "$HOME/Software/${PWD##*/}/VERSION.xsl"
 
-install -v -m644    README \
-                    "$HOME/Software/${PWD##*/}"/README.txt
-install -v -m644    RELEASE-NOTES* NEWS* \
-                    "$HOME/Software/${PWD##*/}"
+    install -v -m644    README \
+                        "$HOME/Software/${PWD##*/}"/README.txt
+    install -v -m644    RELEASE-NOTES* NEWS* \
+                        "$HOME/Software/${PWD##*/}"
 
 Rebuild the catalog:
 
-Catalog="$HOME/Software/${PWD##*/}/catalog"
-Share="$HOME/Software/${PWD##*/}"
+    Catalog="$HOME/Software/${PWD##*/}/catalog"
+    Share="$HOME/Software/${PWD##*/}"
 
-mkdir "${Share}"
+    mkdir "${Share}"
 
-xmkcatalog --noout --create "${Catalog}"
+    xmkcatalog --noout --create "${Catalog}"
 
-xmlcatalog --noout --add "rewriteSystem" \
-           "http://docbook.sourceforge.net/release/xsl/1.79.1" \
-           "${Share}" "${Catalog}"
+    xmlcatalog --noout --add "rewriteSystem" \
+               "http://docbook.sourceforge.net/release/xsl/1.79.1" \
+               "${Share}" "${Catalog}"
 
-xmlcatalog --noout --add "rewriteURI" \
-           "http://docbook.sourceforge.net/release/xsl/1.79.1" \
-           "${Share}" "${Catalog}"
+    xmlcatalog --noout --add "rewriteURI" \
+               "http://docbook.sourceforge.net/release/xsl/1.79.1" \
+               "${Share}" "${Catalog}"
 
-xmlcatalog --noout --add "rewriteSystem" \
-           "http://docbook.sourceforge.net/release/xsl/current" \
-           "${Share}" "${Catalog}"
+    xmlcatalog --noout --add "rewriteSystem" \
+               "http://docbook.sourceforge.net/release/xsl/current" \
+               "${Share}" "${Catalog}"
 
-xmlcatalog --noout --add "rewriteURI" \
-           "http://docbook.sourceforge.net/release/xsl/current" \
-           "${Share}" "${Catalog}"
+    xmlcatalog --noout --add "rewriteURI" \
+               "http://docbook.sourceforge.net/release/xsl/current" \
+               "${Share}" "${Catalog}"
 
-export XML_CATALOG_FILES="${HOME}/Software/docbook-xsl-1.79.1/catalog"
+    export XML_CATALOG_FILES="${HOME}/Software/docbook-xsl-1.79.1/catalog"
 
-cd "${Share}/html" && ln -s ../VERSION.xsl
+    cd "${Share}/html" && ln -s ../VERSION.xsl
 
 
-##Git-SCM
+## Git-SCM
+
 Make Git-SCM, without the `info`:
 
-cd ~/Builds/git-2.37.1
+    cd ~/Builds/git-2.37.1
 
-make XMLTO='xmlto --skip-validation' \
-     prefix="$HOME/Software/${PWD##*/}" \
-     all doc
+    make XMLTO='xmlto --skip-validation' \
+         prefix="$HOME/Software/${PWD##*/}" \
+         all doc
 
 Lots of warnings:
 
     ASCIIDOC git-commit.xml
     XMLTO git-commit.1
-I/O error : Attempt to load network entity http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd
-/Users/phm/Builds/git-2.37.1/Documentation/git-commit.xml:2: warning: failed to load external entity "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"
-D DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"
+    I/O error : Attempt to load network entity http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd
+    /Users/phm/Builds/git-2.37.1/Documentation/git-commit.xml:2: warning: failed to load external entity "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"
+    D DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"
 
-make prefix="$HOME/Software/${PWD##*/}" install
+    make prefix="$HOME/Software/${PWD##*/}" install
 
 I give up! I can't buid Git with full documentation and internationalisation
 
@@ -1416,17 +1419,17 @@ Giving up -- building entire Qt just for this tool is not worth the effort!
 
 https://github.com/llvm/llvm-project/archive/refs/tags/llvmorg-16.0.2.tar.gz
 
-tar -zxf ~/Downloads/llvm-project-llvmorg-16.0.2.tar.gz
+    tar -zxf ~/Downloads/llvm-project-llvmorg-16.0.2.tar.gz
 
-cd llvm-project-llvmorg-16.0.2/openmp/
-mkdir build
-cd build
-cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ ..
+    cd llvm-project-llvmorg-16.0.2/openmp/
+    mkdir build
+    cd build
+    cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ ..
 
-cmake -DCMAKE_INSTALL_PREFIX=${HOME}/Software/openmp-16.0.2 ..
+    cmake -DCMAKE_INSTALL_PREFIX=${HOME}/Software/openmp-16.0.2 ..
 
-make
-make install
+    make
+    make install
 
 
 
@@ -1443,14 +1446,14 @@ make install
 
 https://www.openssl.org/source/openssl-3.0.11.tar.gz
 
-mkdir ~/Builds
-cd ~/Builds
-tar -zxf ~/Downloads/openssl-3.0.11.tar.gz
-cd ./openssl-3.0.11/
-./Configure --prefix="${HOME}/Software/openssl-3.0.11"
-make
-make test
-make install
+    mkdir ~/Builds
+    cd ~/Builds
+    tar -zxf ~/Downloads/openssl-3.0.11.tar.gz
+    cd ./openssl-3.0.11/
+    ./Configure --prefix="${HOME}/Software/openssl-3.0.11"
+    make
+    make test
+    make install
 
 
 # WX-Widgets
@@ -1458,19 +1461,19 @@ make install
 https://wxwidgets.org/downloads/
 wxWidgets-3.2.2.1.tar.bz2
 
-rm -r ~/Software/wxWidgets-3.2.2.1/
-chmod ugo-rwx ~/Software/wxWidgets-3.1.6
+    rm -r ~/Software/wxWidgets-3.2.2.1/
+    chmod ugo-rwx ~/Software/wxWidgets-3.1.6
 
 
 
-cd ~/Builds
-tar -jxf ~/Downloads/wxWidgets-3.2.2.1.tar.bz2 
-cd ./wxWidgets-3.2.2.1/
-./configure \
- --prefix="${HOME}/Software/${PWD##*/}" \
- --enable-webview \
- --enable-compat28
-make && make install
+    cd ~/Builds
+    tar -jxf ~/Downloads/wxWidgets-3.2.2.1.tar.bz2 
+    cd ./wxWidgets-3.2.2.1/
+    ./configure \
+     --prefix="${HOME}/Software/${PWD##*/}" \
+     --enable-webview \
+     --enable-compat28
+    make && make install
 
 
 
@@ -1482,117 +1485,117 @@ https://github.com/erlang/otp/releases/download/OTP-26.1/
 otp_src_26.1.tar.gz
 otp_doc_html_26.1.tar.gz
 
-rm -r ~/Builds/otp_src_26.1/
-echo -e "${PATH//:/\\\n}"
-echo -e "${LDFLAGS//-L/\\\n-L}"
+    rm -r ~/Builds/otp_src_26.1/
+    echo -e "${PATH//:/\\\n}"
+    echo -e "${LDFLAGS//-L/\\\n-L}"
 
-cd ~/Builds
-tar -zxf ~/Downloads/otp_src_26.1.tar.gz
-cd ./otp_src_26.1/
+    cd ~/Builds
+    tar -zxf ~/Downloads/otp_src_26.1.tar.gz
+    cd ./otp_src_26.1/
 
-export PATH=${HOME}/Software/wxWidgets-3.2.2.1/bin:\
-${HOME}/Software/openssl-3.0.11/bin:\
-${PATH}
+    export PATH=${HOME}/Software/wxWidgets-3.2.2.1/bin:\
+    ${HOME}/Software/openssl-3.0.11/bin:\
+    ${PATH}
 
-export CXX=/usr/bin/g++
-export CXXFLAGS="-fpermissive"
+    export CXX=/usr/bin/g++
+    export CXXFLAGS="-fpermissive"
 
-./configure \
---prefix="${HOME}/Software/erlang-26.1" \
---with-dynamic-trace=dtrace \
---with-ssl="${HOME}/Software/openssl-3.0.11" \
---with-wxwidgets="${HOME}/Software/wxWidgets-3.2.2.1" \
---without-odbc \
---without-javac
-
-
-gen/wxe_wrapper_7.cpp:2342:58:
- error: call to member function 'AddTool' is ambiguous
+    ./configure \
+    --prefix="${HOME}/Software/erlang-26.1" \
+    --with-dynamic-trace=dtrace \
+    --with-ssl="${HOME}/Software/openssl-3.0.11" \
+    --with-wxwidgets="${HOME}/Software/wxWidgets-3.2.2.1" \
+    --without-odbc \
+    --without-javac
 
 
-./lib/wx/c_src/gen/wxe_wrapper_7.cpp
-cp ./lib/wx/c_src/gen/wxe_wrapper_7.cpp{,-ORIGINAL}
-
-1045> diff ./lib/wx/c_src/gen/wxe_wrapper_7.cpp{-ORIGINAL,}
-2342c2342,2348
-<   wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
----
->   // phm fix:-
->   // "error: call to member function 'AddTool' is ambiguous"
->   // Using arguments that match "the full AddTool function"
->   // as described in ./wxWidgets-3.2.2.1/include/wx/tbarbase.h
->   // to remove ambiguity
->   wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(
->     toolId,label,*bitmap,wxBitmapBundle(),kind,shortHelp);
+    gen/wxe_wrapper_7.cpp:2342:58:
+     error: call to member function 'AddTool' is ambiguous
 
 
+    ./lib/wx/c_src/gen/wxe_wrapper_7.cpp
+    cp ./lib/wx/c_src/gen/wxe_wrapper_7.cpp{,-ORIGINAL}
+
+    1045> diff ./lib/wx/c_src/gen/wxe_wrapper_7.cpp{-ORIGINAL,}
+    2342c2342,2348
+    <   wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
+    ---
+    >   // phm fix:-
+    >   // "error: call to member function 'AddTool' is ambiguous"
+    >   // Using arguments that match "the full AddTool function"
+    >   // as described in ./wxWidgets-3.2.2.1/include/wx/tbarbase.h
+    >   // to remove ambiguity
+    >   wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(
+    >     toolId,label,*bitmap,wxBitmapBundle(),kind,shortHelp);
 
 
-make SHELL='sh -x'
-
-+ echo ' LD	../priv/aarch64-apple-darwin22.6.0/wxe_driver.so'
- LD	../priv/aarch64-apple-darwin22.6.0/wxe_driver.so
-+ /usr/bin/g++ \
- -mmacosx-version-min=10.10 \
- -bundle \
- -flat_namespace \
- -undefined warning \
- -fPIC \
- ${LDFLAGS} \
- -framework IOKit \
- -framework Carbon \
- -framework Cocoa \
- -framework QuartzCore \
- -framework AudioToolbox \
- -framework System \
- -framework OpenGL \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_stc-3.2.a \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_xrc-3.2.a \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_gl-3.2.a \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_aui-3.2.a \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_webview-3.2.a \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_html-3.2.a \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_core-3.2.a \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_baseu_xml-3.2.a \
- /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_baseu-3.2.a \
- -framework OpenGL \
- -framework AGL \
- -framework WebKit \
- -lwxjpeg-3.2 \
- -lwxpng-3.2 \
- -lwxregexu-3.2 \
- -lwxscintilla-3.2 \
- -lexpat \
- -ltiff \
- -lz \
- -framework Security \
- -lpthread \
- -liconv \
- -o ../priv/aarch64-apple-darwin22.6.0/wxe_driver.so
-ld: warning: -undefined warning is deprecated
-ld: warning: -undefined warning is deprecated
-ld: Undefined symbols:
-  _enif_alloc, referenced from:
-      WxeApp::OnInit() in wxe_impl.o
-      _newMemEnv in wxe_impl.o
-      _newMemEnv in wxe_impl.o
-  _enif_alloc_env, referenced from:
-      wxControlWithItems_Append_2(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
-      wxControlWithItems_appendStrings_2(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
-      wxControlWithItems_setClientData(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
-      wxControlWithItems_Insert_3(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
-      wxControlWithItems_insertStrings_3(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
-      wxEvtHandler_Connect(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_3.o
-      wxTreeCtrl_AddRoot(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_7.o
-      ...
-
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-make[3]: *** [Makefile:181: ../priv/aarch64-apple-darwin22.6.0/wxe_driver.so] Error 1
-make[3]: Leaving directory '/Users/phm/Builds/otp_src_26.1/lib/wx/c_src'
 
 
-NOTE: this could be caused by the --disable-dynamic configuration option in
-wxWidgets.
+    make SHELL='sh -x'
+
+    + echo ' LD	../priv/aarch64-apple-darwin22.6.0/wxe_driver.so'
+     LD	../priv/aarch64-apple-darwin22.6.0/wxe_driver.so
+    + /usr/bin/g++ \
+     -mmacosx-version-min=10.10 \
+     -bundle \
+     -flat_namespace \
+     -undefined warning \
+     -fPIC \
+     ${LDFLAGS} \
+     -framework IOKit \
+     -framework Carbon \
+     -framework Cocoa \
+     -framework QuartzCore \
+     -framework AudioToolbox \
+     -framework System \
+     -framework OpenGL \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_stc-3.2.a \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_xrc-3.2.a \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_gl-3.2.a \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_aui-3.2.a \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_webview-3.2.a \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_html-3.2.a \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_osx_cocoau_core-3.2.a \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_baseu_xml-3.2.a \
+     /Users/phm/Software/wxWidgets-3.2.2.1/lib/libwx_baseu-3.2.a \
+     -framework OpenGL \
+     -framework AGL \
+     -framework WebKit \
+     -lwxjpeg-3.2 \
+     -lwxpng-3.2 \
+     -lwxregexu-3.2 \
+     -lwxscintilla-3.2 \
+     -lexpat \
+     -ltiff \
+     -lz \
+     -framework Security \
+     -lpthread \
+     -liconv \
+     -o ../priv/aarch64-apple-darwin22.6.0/wxe_driver.so
+    ld: warning: -undefined warning is deprecated
+    ld: warning: -undefined warning is deprecated
+    ld: Undefined symbols:
+      _enif_alloc, referenced from:
+          WxeApp::OnInit() in wxe_impl.o
+          _newMemEnv in wxe_impl.o
+          _newMemEnv in wxe_impl.o
+      _enif_alloc_env, referenced from:
+          wxControlWithItems_Append_2(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
+          wxControlWithItems_appendStrings_2(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
+          wxControlWithItems_setClientData(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
+          wxControlWithItems_Insert_3(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
+          wxControlWithItems_insertStrings_3(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_2.o
+          wxEvtHandler_Connect(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_3.o
+          wxTreeCtrl_AddRoot(WxeApp*, wxeMemEnv*, wxeCommand&) in wxe_wrapper_7.o
+          ...
+
+    clang: error: linker command failed with exit code 1 (use -v to see invocation)
+    make[3]: *** [Makefile:181: ../priv/aarch64-apple-darwin22.6.0/wxe_driver.so] Error 1
+    make[3]: Leaving directory '/Users/phm/Builds/otp_src_26.1/lib/wx/c_src'
+
+
+    NOTE: this could be caused by the --disable-dynamic configuration option in
+    wxWidgets.
 
 
 
@@ -1745,11 +1748,11 @@ Mac OSX.
 
 
 
-https://www.xquartz.org/
+* https://www.xquartz.org/
 
-https://github.com/orgs/Homebrew/discussions/4993
+* https://github.com/orgs/Homebrew/discussions/4993
 
-https://github.com/ImageMagick/ImageMagick/issues/5818
+* https://github.com/ImageMagick/ImageMagick/issues/5818
 
 Example options for building Imagemajick:
 
