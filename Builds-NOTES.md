@@ -1,9 +1,11 @@
-Building Joe-Editor
+# Building Joe-Editor
 
 insert the following line into joe/tty.c
-#include <util.h>
-This prevents error: implicit declaration of functions
- 'openoty' ... 'login_tty'
+    #include <util.h>
+This prevents:
+
+    error: implicit declaration of functions
+    'openoty' ... 'login_tty'
 
 
 
@@ -11,17 +13,17 @@ This prevents error: implicit declaration of functions
 
 Source https://www.openssl.org/source/
 
-mkdir ~/Builds
-cd ~/Builds
-tar -zxf ~/Downloads/openssl-3.0.2.tar
-cd openssl-3.0.2
-./Configure --prefix=$HOME/Software/openssl-3.0.2
-make
-make test
-make install
+    mkdir ~/Builds
+    cd ~/Builds
+    tar -zxf ~/Downloads/openssl-3.0.2.tar
+    cd openssl-3.0.2
+    ./Configure --prefix=$HOME/Software/openssl-3.0.2
+    make
+    make test
+    make install
 
-phm@MacBook-Pro openssl-3.0.2 % ls ~/Software/openssl-3.0.2 
-bin	include	lib	share	ssl
+    phm@MacBook-Pro openssl-3.0.2 % ls ~/Software/openssl-3.0.2 
+    bin	include	lib	share	ssl
 
 
 
