@@ -1780,6 +1780,10 @@ Example options for building Imagemajick:
 
 # XMLStarlet
 
+Depends on:
+* [LibXML2](build-and-install-libxml2) Verison 2.9.10
+* MacOS provides libxslt-1.1.35, according to `configure` script output.
+
 [Wikipedia XMLStarlet](https://en.wikipedia.org/wiki/XMLStarlet)
 
 [Sourceforge project](https://xmlstar.sourceforge.net/)
