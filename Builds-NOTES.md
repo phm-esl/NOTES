@@ -1772,3 +1772,75 @@ Example options for building Imagemajick:
      --with-x \
      --prefix=${HOME}/bin/ImageMagick7.0.8-65
 
+
+
+
+
+
+
+# XMLStarlet
+
+[Wikipedia XMLStarlet](https://en.wikipedia.org/wiki/XMLStarlet)
+
+[Sourceforge project](https://xmlstar.sourceforge.net/)
+
+Repository:
+
+```
+git clone https://git.code.sf.net/p/xmlstar/code xmlstar-code
+```
+
+Tar file downloaded: `xmlstarlet-1.6.1.tar.gz`
+
+[Link alias to SF download](https://sourceforge.net/projects/xmlstar/files/latest/download)
+[Direct download link](https://netix.dl.sourceforge.net/project/xmlstar/xmlstarlet/1.6.1/xmlstarlet-1.6.1.tar.gz)
+
+
+Minor compilation fix:
+
+```
+$> diff src/xml_elem.c{~,}
+189c189
+< hash_key_put(void *payload, void *data, xmlChar *name)
+---
+> hash_key_put(void *payload, void *data, const xmlChar *name)
+```
+
+Build script:
+
+```
+cd ~/Builds
+tar -zxf ~/Downloads/xmlstarlet-1.6.1.tar.gz
+cd xmlstarlet-1.6.1/
+./configure --prefix=$HOME/Software/${PWD##*/}
+make && make install
+```
+
+Examples:
+
+```
+$> cd ~/Repos/Workshop/sandpit/
+
+$> xml val -e -s ./protocol_tools/priv/pacs.008.001.11.xsd ./original.xml
+/Users/phm/Repos/Workshop/sandpit/original.xml - valid
+
+$> xml val -e -s ./protocol_tools/priv/pacs.008.001.11.xsd ./modified.xml
+/Users/phm/Repos/Workshop/sandpit/modified.xml:1.147: Element '{urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}MsgId': [facet 'minLength'] The value has a length of '0'; this underruns the allowed minimum length of '1'.
+/Users/phm/Repos/Workshop/sandpit/modified.xml:1.184: Element '{urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}CreDtTm': '2024-08-09T02 =>32' is not a valid value of the atomic type '{urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}ISODateTime'.
+/Users/phm/Repos/Workshop/sandpit/modified.xml:1.287: Element '{urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}PmtId': Missing child element(s). Expected is one of ( {urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}InstrId, {urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}EndToEndId ).
+/Users/phm/Repos/Workshop/sandpit/modified.xml:1.605: Element '{urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}CtryOfRes': [facet 'pattern'] The value 'xxxxxx' is not accepted by the pattern '[A-Z]{2,2}'.
+/Users/phm/Repos/Workshop/sandpit/modified.xml:1.652: Element '{urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}BICFI': [facet 'pattern'] The value 'gfdg' is not accepted by the pattern '[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}'.
+/Users/phm/Repos/Workshop/sandpit/modified.xml:1.716: Element '{urn:iso:std:iso:20022:tech:xsd:pacs.008.001.11}BICFI': [facet 'pattern'] The value 'fdgfd' is not accepted by the pattern '[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}'.
+/Users/phm/Repos/Workshop/sandpit/modified.xml - invalid
+
+$> xml val -e -s \
+  protocol_tools/priv/pacs.008.001.11.xsd \
+  protocol_tools/priv/pacs008.xml
+protocol_tools/priv/pacs008.xml - valid
+
+$> xml val -e -s \
+  protocol_tools/priv/pacs.003.001.10.xsd \
+  protocol_tools/priv/pacs003.xml
+protocol_tools/priv/pacs003.xml:1.411: Element '{urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}DrctDbtTxInf': Missing child element(s). Expected is one of ( {urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}IntrBkSttlmDt, {urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}SttlmPrty, {urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}SttlmTmIndctn, {urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}InstdAmt, {urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}XchgRate, {urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}ChrgBr ).
+protocol_tools/priv/pacs003.xml - invalid
+```
