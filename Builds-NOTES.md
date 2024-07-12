@@ -22,7 +22,7 @@ Source https://www.openssl.org/source/
     make test
     make install
 
-    phm@MacBook-Pro openssl-3.0.2 % ls ~/Software/openssl-3.0.2 
+    phm@MacBook-Pro openssl-3.0.2 % ls ~/Software/openssl-3.0.2
     bin	include	lib	share	ssl
 
 
@@ -151,7 +151,7 @@ Trying again with OpenSSL-1.1.1o instead
     +  const wxBitmap * Result = &Tmp;
        wxeReturn rt = wxeReturn(memenv, Ecmd.caller, true);
        rt.send(  rt.make_ref(app->getRef((void *)Result,memenv), "wxBitmap"));
-     
+
     diff --git a/lib/wx/c_src/gen/wxe_wrapper_7.cpp b/lib/wx/c_src/gen/wxe_wrapper_7.cpp
     index f4716e1228..f06517541b 100644
     --- a/lib/wx/c_src/gen/wxe_wrapper_7.cpp
@@ -209,7 +209,7 @@ and try yet again:
     **********************  DOCUMENTATION INFORMATION  ******************
     *********************************************************************
 
-    documentation  : 
+    documentation  :
                      fop is missing.
                      Using fakefop to generate placeholder PDF files.
 
@@ -224,7 +224,7 @@ and try yet again:
 The compilation errors that the two source file patches manage to work around:
 
 
-    gen/wxe_wrapper_5.cpp:2165:29: error: taking the address of a temporary 
+    gen/wxe_wrapper_5.cpp:2165:29: error: taking the address of a temporary
     object of type 'wxBitmap' [-Waddress-of-temporary]
       const wxBitmap * Result = &This->GetBitmap();
                                 ^~~~~~~~~~~~~~~~~~
@@ -236,16 +236,16 @@ The compilation errors that the two source file patches manage to work around:
 
 
 
-    gen/wxe_wrapper_7.cpp:2342:58: error: call to member function 'AddTool' is 
+    gen/wxe_wrapper_7.cpp:2342:58: error: call to member function 'AddTool' is
     ambiguous
-      wxToolBarToolBase * Result = 
+      wxToolBarToolBase * Result =
     (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
                                                        ~~~~~~^~~~~~~
-    /Users/phm/Software/wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h:311:24: 
+    /Users/phm/Software/wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h:311:24:
     note: candidate function
         wxToolBarToolBase *AddTool(int toolid,
                            ^
-    /Users/phm/Software/wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h:527:24: 
+    /Users/phm/Software/wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h:527:24:
     note: candidate function
         wxToolBarToolBase *AddTool(int toolid,
                            ^
@@ -258,9 +258,9 @@ The compilation errors that the two source file patches manage to work around:
 
 # Build and install Elixir
 
-    tar -zxf ~/Downloads/elixir-1.13.4.tar 
+    tar -zxf ~/Downloads/elixir-1.13.4.tar
     cd elixir-1.13.4/
-    make PREFIX=/Users/phm/Software/erlang-24.3.3 
+    make PREFIX=/Users/phm/Software/erlang-24.3.3
     make PREFIX=/Users/phm/Software/erlang-24.3.3 install
 
 
@@ -337,7 +337,7 @@ section Install Phoenix:
     * creating demo/priv/static/images/phoenix.png
     * creating demo/priv/static/favicon.ico
 
-    Fetch and install dependencies? [Yn] 
+    Fetch and install dependencies? [Yn]
     * running mix deps.get
     * running mix deps.compile
 
@@ -385,11 +385,11 @@ You can also run your app inside IEx (Interactive Elixir) as:
 MacOS only provides BSD grep 2.6.0-FreeBSD
 
     cd ~/Builds
-    tar -xf ~/Downloads/grep-3.7.tar 
+    tar -xf ~/Downloads/grep-3.7.tar
     cd grep-3.7/
     ./configure --help
     ./configure --prefix=$HOME/Software/grep-3.7
-    make 
+    make
     make install
 
 
@@ -402,7 +402,7 @@ The configure option --enable-widec enables UTF8
 https://invisible-island.net/ncurses/ncurses.faq.html
 
     cd ~/Builds
-    tar -xf ~/Downloads/ncurses-6.3.tar 
+    tar -xf ~/Downloads/ncurses-6.3.tar
     cd ./ncurses-6.3/
     ./configure --prefix=$HOME/Software/ncurses-6.3 --enable-widec
     make clean && make && make install
@@ -411,7 +411,7 @@ https://invisible-island.net/ncurses/ncurses.faq.html
 # Build and install nano editor
 
     cd ~/Builds
-    tar -xf ~/Downloads/ncurses-6.3.tar 
+    tar -xf ~/Downloads/ncurses-6.3.tar
     cd ncurses-6.3/
     export LDFLAGS="-L$HOME/Software/ncurses-6.3/lib"
     ./configure --prefix=$HOME/Software/nano-6.3
@@ -441,7 +441,7 @@ Documentation postgresql-14-A4.pdf location:
 Build process:
 
     cd ~/Builds
-    tar -jxf ~/Downloads/postgresql-14.3.tar.bz2 
+    tar -jxf ~/Downloads/postgresql-14.3.tar.bz2
     cd postgresql-14.3/
     ./configure --prefix=$HOME/Software/postgresql-14.3
     make world
@@ -503,7 +503,7 @@ Start DB server as instructed:
            \? for help with psql commands
            \g or terminate with semicolon to execute query
            \q to quit
-    test=# 
+    test=#
 
 
 
@@ -534,10 +534,10 @@ PostGIS extension, which in turn depends on:
 Required for building libgeos.org, that in turn is required for
 PostGIS.net...
 
-    tar -xf ~/Downloads/cmake-3.23.2.tar 
+    tar -xf ~/Downloads/cmake-3.23.2.tar
     cd cmake-3.23.2/
     ./configure --prefix=$HOME/Software/cmake-3.23.2
-    make 
+    make
     make install
 
 Start a new shell to refresh the $PATH:
@@ -552,7 +552,7 @@ Start a new shell to refresh the $PATH:
 # Build and install libgeos
 
     cd ~/Builds
-    tar -jxf ~/Downloads/geos-3.10.3.tar.bz2 
+    tar -jxf ~/Downloads/geos-3.10.3.tar.bz2
     cd geos-3.10.3
     mkdir build
     cd build
@@ -581,7 +581,7 @@ files can be found by the PostGIS build.
 
 # Build and install proj.org
 
-The Cmake build system introduced with version proj-9.0.1 is broken, for me. 
+The Cmake build system introduced with version proj-9.0.1 is broken, for me.
 The previous proj-8.2.1 uses GNU autotools to build, which succeeds on Apple
 M1 Silicon.
 
@@ -589,7 +589,7 @@ There's a dependency on SQLite, so in addition to PostGres, we also need
 SQLite...
 
     cd ~/Build
-    tar -xf ~/Downloads/sqlite-autoconf-3390000.tar 
+    tar -xf ~/Downloads/sqlite-autoconf-3390000.tar
     cd sqlite-autoconf-3390000/
     ./configure --prefix=$HOME/Software/sqlite-3.39.0
     make
@@ -598,7 +598,7 @@ SQLite...
 And LibTIFF
 
     cd ~/Builds
-    tar -xf ~/Downloads/tiff-4.4.0.tar 
+    tar -xf ~/Downloads/tiff-4.4.0.tar
     cd tiff-4.4.0/
     ./configure --prefix=$HOME/Software/tiff-4.4.0
     make
@@ -650,7 +650,7 @@ Avoiding GDAL version 3.5 because of an experimental CMake-based build.
 No comment: like falling off a log...
 
     http://xmlsoft.org/download/libxml2-sources-2.9.10.tar.gz
-    tar -xf ~/Downloads/libxml2-sources-2.9.10.tar 
+    tar -xf ~/Downloads/libxml2-sources-2.9.10.tar
     cd libxml2-2.9.10/
     ./configure --prefix=$HOME/Software/libxml2-2.9.10
     make
@@ -667,7 +667,7 @@ https://github.com/json-c/json-c/releases/tag/json-c-0.16-20220414
 Using the `cmake-configure` script. Not installing Doxygen.
 
     cd ~/Builds
-    tar -xf ~/Downloads/json-c-json-c-0.16-20220414.tar 
+    tar -xf ~/Downloads/json-c-json-c-0.16-20220414.tar
     cd json-c-json-c-0.16-20220414/
     mkdir build
     cd build
@@ -683,10 +683,10 @@ according to the `--prefix` option spec.
 
 # Build and install GNU Autoconf
 
-The `protobuf-c` tagged source archive needs `autoreconf`: 
+The `protobuf-c` tagged source archive needs `autoreconf`:
 
     cd ~/Builds
-    tar -xf ~/Downloads/autoconf-2.71.tar 
+    tar -xf ~/Downloads/autoconf-2.71.tar
     cd autoconf-2.71/
     ./configure --prefix=$HOME/Software/autoconf-2.71
     make
@@ -700,7 +700,7 @@ The `protobuf-c` tagged source archive needs `autoreconf`:
 The `autoreconf` tool needs `aclocal`
 
     cd ~/Builds
-    tar -xf ~/Downloads/automake-1.16.5.tar 
+    tar -xf ~/Downloads/automake-1.16.5.tar
     cd automake-1.16.5/
     ./configure --prefix=$HOME/Software/automake-1.15.5
     make
@@ -713,7 +713,7 @@ The `aclocal` tool needs `libtool`... and on and on and on... The
 installation of `aclocal` and `libtool` provided with Apple Xcode is
 incomplete, missing `libtoolize`
 
-    tar -xf ~/Downloads/libtool-2.4.6.tar 
+    tar -xf ~/Downloads/libtool-2.4.6.tar
     ./configure --prefix=$HOME/Software/libtool-2.4.6
 
 This will fix the following message from `protobuf-c-1.4.0/autogen.ac`
@@ -735,7 +735,7 @@ it here:
 # Build and install pkg-config
 
     cd ~/Builds/
-    tar -xf ~/Downloads/pkg-config-pkg-config-0.29.2.tar.gz 
+    tar -xf ~/Downloads/pkg-config-pkg-config-0.29.2.tar.gz
     cd pkg-config-pkg-config-0.29.2/
 
     libtoolize: putting auxiliary files in '.'.
@@ -822,7 +822,7 @@ Trying to solve linker errors:
 
     export LDFLAGS="-stdlib=libc++"
 
-    tar -xf ~/Downloads/postgis-3.1.5.tar 
+    tar -xf ~/Downloads/postgis-3.1.5.tar
     cd postgis-3.1.5/
     ./configure --without-protobuf
     make
@@ -836,7 +836,7 @@ The `--without-protobuf` is specified because trying to build `protobuf-c`
 was unsuccessful (frankly, it's broken!) and the option suppresses the
 following configure error:
 
-    configure: error: unable to find protobuf-c/protobuf-c.h using CPPFLAGS. 
+    configure: error: unable to find protobuf-c/protobuf-c.h using CPPFLAGS.
     You can disable MVT and Geobuf support using --without-protobuf
 
 
@@ -879,7 +879,7 @@ provides `python3` with version 3.8.9. Installing Python-3.9 from source...
 ## Python3.9
 
     cd ~/Builds
-    tar -xf ~/Downloads/Python-3.9.13.tar 
+    tar -xf ~/Downloads/Python-3.9.13.tar
     cd Python-3.9.13/
     ./configure \
       --prefix=$HOME/Software/${PWD##*/} \
@@ -897,7 +897,7 @@ Second Kashet failure:
         import yaml
     ModuleNotFoundError: No module named 'yaml'
     make: *** [Makefile:42: config-nodes] Error 1
-    error = 2 
+    error = 2
 
 Installing PyYAML, and its dependency LibYAML...
 
@@ -909,7 +909,7 @@ Requires LibYAML as dependency.
 Download the tagged source archive https://github.com/yaml/libyaml/tags
 
     cd ~/Builds
-    tar -xf ~/Downloads/libyaml-0.2.5.tar 
+    tar -xf ~/Downloads/libyaml-0.2.5.tar
     ./bootstrap
 
 Gives error:
@@ -941,7 +941,7 @@ Success!
 New terminal to refresh `$PATH` etc. to add LibYAML.
 
     cd ~/Builds
-    tar -xf ~/Downloads/PyYAML-6.0.tar 
+    tar -xf ~/Downloads/PyYAML-6.0.tar
     cd PyYAML-6.0/
     python3.9 ./setup.py install
 
@@ -955,11 +955,11 @@ Third Kashet failure:
         raise TypeError(f'Invalid port configuration on {node}')
     TypeError: Invalid port configuration on api_node
     make: *** [Makefile:42: config-nodes] Error 1
-    error = 2 
+    error = 2
 
 This is odd, as there appears to be the necessary data in the file:
 
-    $> cat api_node/node.config.yml 
+    $> cat api_node/node.config.yml
     ports:
       - '8080:8080'
     type: 'frontend'
@@ -981,16 +981,16 @@ The `make` instruction works on this branch.
     make
     make run
 
-    ./scripts/smoke_tests.py 
+    ./scripts/smoke_tests.py
 
-    tail -F ../logs/adminapi/hive_node.log 
-    tail -F ../logs/corebanking/hive_node.log 
-    tail -F ../logs/adminapi/hive_node.log 
+    tail -F ../logs/adminapi/hive_node.log
+    tail -F ../logs/corebanking/hive_node.log
+    tail -F ../logs/adminapi/hive_node.log
 
 The failure stems from this server not responding:
 
     2022-07-07T12:04:18:::z phm@SugoiRingo:~/Repos/Kashet/kashet/scripts
-    tail -F ../logs/adminapi/hive_node.log 
+    tail -F ../logs/adminapi/hive_node.log
 
     2022-07-07T11:03:54.801470+00:00\
      /hive_node/apps/hive_requests/src/hive_requests.erl:294 error:\
@@ -1025,13 +1025,14 @@ Running a specific node in a local container:
     [corebanking,kyc,notifications]
 
     (logic@172.19.0.2)14> ls ("/var/log/hive").
-    hive_node.log     
+    hive_node.log
 
     (logic@172.19.0.2)15> io:format("~s~n", \
       [element(2, file:read_file("/var/log/hive/hive_node.log"))] ).
 
-    (logic@172.19.0.2)20> hive:sync_call(kyc,{lists,seq,[1,5]}).                    [1,2,3,4,5]          
-    [1,2,3,4,5]          
+    (logic@172.19.0.2)20> hive:sync_call(kyc,{lists,seq,[1,5]}).
+    [1,2,3,4,5]
+    [1,2,3,4,5]
 
 
 
@@ -1048,7 +1049,7 @@ Running a specific node in a local container:
 Date: 2022-07-11
 
     cd ~/Builds
-    tar -xf ~/Downloads/Python-3.10.5.tar 
+    tar -xf ~/Downloads/Python-3.10.5.tar
     cd Python-3.10.5/
     ./configure \
       --prefix=$HOME/Software/${PWD##*/} \
@@ -1060,7 +1061,7 @@ Date: 2022-07-11
 New terminal to refresh `$PATH` etc. to add LibYAML.
 
     cd ~/Builds
-    tar -xf ~/Downloads/PyYAML-6.0.tar 
+    tar -xf ~/Downloads/PyYAML-6.0.tar
     cd PyYAML-6.0/
     python3.10 ./setup.py install
 
@@ -1071,7 +1072,7 @@ Date: 2022-07-12
 
 Apply a patch to one C file:
 
-    $> diff -p lib/wx/c_src/gen/wxe_wrapper_7.cpp{~,} 
+    $> diff -p lib/wx/c_src/gen/wxe_wrapper_7.cpp{~,}
     *** lib/wx/c_src/gen/wxe_wrapper_7.cpp~	2022-06-21 07:26:14.000000000 +0100
     --- lib/wx/c_src/gen/wxe_wrapper_7.cpp	2022-07-12 10:59:22.000000000 +0100
     *************** void wxToolBar_AddTool_4(WxeApp *app, wx
@@ -1082,7 +1083,7 @@ Apply a patch to one C file:
     !   wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
         wxeReturn rt = wxeReturn(memenv, Ecmd.caller, true);
         rt.send(  rt.make_ref(app->getRef((void *)Result,memenv), "wx"));
-      
+
     --- 2339,2346 ----
           } else        Badarg("Options");
         };
@@ -1106,7 +1107,7 @@ Apply a patch to one C file:
 
 Build and install Elixir
 
-    tar -zxf ~/Downloads/elixir-1.13.4.tar 
+    tar -zxf ~/Downloads/elixir-1.13.4.tar
     cd elixir-1.13.4/
     make clean
     make PREFIX=/Users/phm/Software/erlang-25.0.2
@@ -1136,7 +1137,7 @@ New shell to refresh `$PATH`
 
     cd ~/Builds
     xz -d ~/Downloads/findutils-4.9.0.tar.xz
-    tar -xf ~/Downloads/findutils-4.9.0.tar 
+    tar -xf ~/Downloads/findutils-4.9.0.tar
     cd findutils-4.9.0
     ./configure --prefix=$HOME/Software/${PWD##*/}
     make && make install
@@ -1145,8 +1146,8 @@ New shell to refresh `$PATH`
 # GNU sed
 
     cd ~/Builds/
-    xz -d ~/Downloads/sed-4.8.tar.xz 
-    tar -xf ~/Downloads/sed-4.8.tar 
+    xz -d ~/Downloads/sed-4.8.tar.xz
+    tar -xf ~/Downloads/sed-4.8.tar
     cd sed-4.8/
     ./configure --prefix=$HOME/Software/${PWD##*/}
     make && make install
@@ -1172,7 +1173,7 @@ Missing GNU libtool for gettext. Set `NO_GETTEXT` as work-around.
 Missing asciidoc, xmlto & docbook2x. Skip building `doc` and `info` targets.
 
     cd ~/Builds/
-    tar -xf ~/Downloads/git-2.37.1.tar 
+    tar -xf ~/Downloads/git-2.37.1.tar
     cd git-2.37.1/
     NO_GETTEXT=y make prefix="$HOME/Software/${PWD##*/}" all
     NO_GETTEXT=y make prefix="$HOME/Software/${PWD##*/}" install
@@ -1201,7 +1202,7 @@ by doing the following:
 There a couple of dependencies on gettext and libintl in Xmlto and Getopt
 
     cd ~/Builds/
-    tar -xf ~/Downloads/gettext-0.21.tar 
+    tar -xf ~/Downloads/gettext-0.21.tar
     cd gettext-0.21/
     ./configure --prefix="$HOME/Software/${PWD##*/}"
     make
@@ -1212,7 +1213,7 @@ There a couple of dependencies on gettext and libintl in Xmlto and Getopt
 
 Needed to build xmlto. Missing `getopt`
 "You need getopt from <http://software.frodo.looijaard.name/getopt/>".
-And in turn Getopt needs gettext, 
+And in turn Getopt needs gettext,
 
 The Makefile needs alteration, to avoid this linker error:
 
@@ -1238,7 +1239,7 @@ The Mikefile line to change, adding `-lintl` for gettext libraries:
 Build sequence:
 
     cd ~/Builds/
-    tar -xf ~/Downloads/getopt-1.1.6.tar 
+    tar -xf ~/Downloads/getopt-1.1.6.tar
     cd getopt-1.1.6/
     make
     make install prefix="$HOME/Software/${PWD##*/}"
@@ -1250,7 +1251,7 @@ Build sequence:
 Source archive https://releases.pagure.org/xmlto/
 
     cd ~/Builds/
-    tar -xf ~/Downloads/xmlto-0.0.28.tar 
+    tar -xf ~/Downloads/xmlto-0.0.28.tar
     cd xmlto-0.0.28/
     ./configure --prefix="$HOME/Software/${PWD##*/}"
     make
@@ -1259,7 +1260,7 @@ Source archive https://releases.pagure.org/xmlto/
 ## Docbook2x
 
     cd ~/Builds/
-    tar -xf ~/Downloads/docbook2X-0.8.8.tar 
+    tar -xf ~/Downloads/docbook2X-0.8.8.tar
     cd docbook2X-0.8.8/
     ./configure --prefix="$HOME/Software/${PWD##*/}"
     make
@@ -1271,7 +1272,7 @@ Source archive https://releases.pagure.org/xmlto/
 https://www.linuxfromscratch.org/blfs/view/8.1/pst/docbook-xsl.html
 
     cd ~/Builds/
-    tar -xf ~/Downloads/docbook-xsl-1.79.1.tar.bz2 
+    tar -xf ~/Downloads/docbook-xsl-1.79.1.tar.bz2
     cd docbook-xsl-1.79.1/
 
     install -v -m755 -d "$HOME/Software/${PWD##*/}"
@@ -1342,7 +1343,7 @@ Lots of warnings:
 I give up! I can't build Git with full documentation and internationalisation
 
     cd ~/Builds/
-    tar -xf ~/Downloads/git-2.37.1.tar 
+    tar -xf ~/Downloads/git-2.37.1.tar
     cd git-2.37.1/
     make prefix="$HOME/Software/${PWD##*/}" all
     make prefix="$HOME/Software/${PWD##*/}" install
@@ -1359,7 +1360,7 @@ I give up! I can't build Git with full documentation and internationalisation
 https://nmap.org/download.html#source
 
     cd ~/Builds/
-    tar -xf ~/Downloads/nmap-7.92.tar 
+    tar -xf ~/Downloads/nmap-7.92.tar
     cd nmap-7.92/
     ./configure --prefix=$HOME/Software/${PWD##*/}
     make && make install
@@ -1389,14 +1390,14 @@ https://www.gnu.org/software/coreutils/coreutils.html
 Sources for Ogg and Vorbis https://xiph.org/downloads/
 
     cd ~/Builds
-    tar -zxf  ~/Downloads/libogg-1.3.5.tar.gz 
+    tar -zxf  ~/Downloads/libogg-1.3.5.tar.gz
     cd libogg-1.3.5/
     ./configure --prefix="$HOME/Software/${PWD##*/}"
     make
     make install
 
     cd ~/Builds
-    tar -Jxf ~/Downloads/libvorbis-1.3.7.tar.xz 
+    tar -Jxf ~/Downloads/libvorbis-1.3.7.tar.xz
     cd libvorbis-1.3.7/
     ./configure --prefix="$HOME/Software/${PWD##*/}"
     make
@@ -1467,7 +1468,7 @@ wxWidgets-3.2.2.1.tar.bz2
 
 
     cd ~/Builds
-    tar -jxf ~/Downloads/wxWidgets-3.2.2.1.tar.bz2 
+    tar -jxf ~/Downloads/wxWidgets-3.2.2.1.tar.bz2
     cd ./wxWidgets-3.2.2.1/
     ./configure \
      --prefix="${HOME}/Software/${PWD##*/}" \
@@ -1641,7 +1642,7 @@ Radek suggested has been merge in.
       --with-ssl="${HOME}/Software/openssl-3.0.11" \
       --with-wxwidgets="${HOME}/Software/wxWidgets-3.2.2.1" \
       --without-odbc \
-      --without-javac 
+      --without-javac
     make
     make install
 
@@ -1671,7 +1672,7 @@ Open a new terminal to refresh the environment:
     Erlang/OTP 27 [DEVELOPMENT] [erts-14.1] [source-7ea625a785] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit] [dtrace]
 
     Interactive Elixir (1.15.6) - press Ctrl+C to exit (type h() ENTER for help)
-    iex(1)> 
+    iex(1)>
 
 Success!
 
@@ -1685,7 +1686,7 @@ https://github.com/erlang/rebar3/releases
 https://codeload.github.com/erlang/rebar3/tar.gz/refs/tags/3.22.1
 
     cd ~/Builds/
-    tar -zxf ~/Downloads/rebar3-3.22.1.tar.gz 
+    tar -zxf ~/Downloads/rebar3-3.22.1.tar.gz
     cd ./rebar3-3.22.1/
     ./bootstrap
 
@@ -1711,9 +1712,9 @@ Ghostscript Print Description Language
 
 [Releases](https://ghostscript.com/releases/gpdldnld.html)
 
-    tar -zxf ~/Downloads/ghostpdl-10.02.0.tar.gz 
+    tar -zxf ~/Downloads/ghostpdl-10.02.0.tar.gz
     cd ghostpdl-10.02.0/
-    ./configure  --prefix="${HOME}/Software/${PWD##*/}"  
+    ./configure  --prefix="${HOME}/Software/${PWD##*/}"
     make -j10 && make install
 
 In a new terminal, to refresh the value of `$PATH`
@@ -1729,7 +1730,7 @@ Mac OSX.
 
     git clone https://github.com/ImageMagick/ImageMagick.git ImageMagick
     cd ImageMagick
-    ./configure --prefix="${HOME}/Software/ImageMagick-7.1.1"  
+    ./configure --prefix="${HOME}/Software/ImageMagick-7.1.1"
     make && make install
 
     git clone https://github.com/ImageMagick/ImageMagick.git ImageMagick
@@ -1737,7 +1738,7 @@ Mac OSX.
     ./configure \
     --enable-delegate-build \
     --with-x=yes \
-    --prefix="${HOME}/Software/ImageMagick-7.1.1"  
+    --prefix="${HOME}/Software/ImageMagick-7.1.1"
     make && make install
 
     export DISPLAY=:0
@@ -1874,4 +1875,122 @@ protocol_tools/priv/pacs003.xml:1.411: \
     {urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}XchgRate, \
     {urn:iso:std:iso:20022:tech:xsd:pacs.003.001.10}ChrgBr ).
 protocol_tools/priv/pacs003.xml - invalid
+```
+
+
+
+
+
+
+
+# 2024-07-12
+
+## OpenSSL version 3.3.1
+
+```
+cd ~/Builds/
+tar -zxf ~/Downloads/openssl-3.3.1.tar.gz
+cd openssl-3.3.1/
+./Configure --prefix=$HOME/Software/openssl-3.3.1
+make
+make test
+make install
+```
+
+
+
+
+## Erlang/OTP 27
+
+Latest from erlang.org is 27.0.1 as of 2024-07-12
+
+```
+mkdir -p ~/Builds
+cd ~/Builds
+tar -zxf ~/Downloads/otp_src_27.0.1.tar.gz
+cd otp_src_27.0.1/
+
+export CFLAGS='-O2 -g -I$HOME/Software/openssl-3.3.1/include'
+
+make clean
+./configure \
+--prefix="$HOME/Software/erlang-27.0.1" \
+--with-ssl="$HOME/Software/openssl-3.3.1"
+make
+make install
+```
+
+### Diagnose compilation error
+
+
+```
+make
+...
+ CXX	aarch64-apple-darwin23.5.0/wxe_wrapper_7.o
+gen/wxe_wrapper_7.cpp:2342:58: error: call to member function 'AddTool' is ambiguous
+  wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
+                                                   ~~~~~~^~~~~~~
+/Users/phm/Software/wxWidgets-3.2.2.1/include/wx-3.2/wx/tbarbase.h:311:24: note: candidate function
+    wxToolBarToolBase *AddTool(int toolid,
+                       ^
+/Users/phm/Software/wxWidgets-3.2.2.1/include/wx-3.2/wx/tbarbase.h:527:24: note: candidate function
+    wxToolBarToolBase *AddTool(int toolid,
+                       ^
+```
+
+Looks like the same problem as before, still not fixed:
+
+```
+diff --git a/lib/wx/c_src/gen/wxe_wrapper_7.cpp b/lib/wx/c_src/gen/wxe_wrapper_7.cpp
+index f4716e1228..f06517541b 100644
+--- a/lib/wx/c_src/gen/wxe_wrapper_7.cpp
++++ b/lib/wx/c_src/gen/wxe_wrapper_7.cpp
+@@ -2339,7 +2339,13 @@ void wxToolBar_AddTool_4(WxeApp *app, wxeMemEnv *memenv, wxeCommand& Ecmd)
+     } else        Badarg("Options");
+   };
+   if(!This) throw wxe_badarg("This");
+-  wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
++  // phm fix:-
++  // "error: call to member function 'AddTool' is ambiguous"
++  // Using arguments that match "the full AddTool function"
++  // as described in wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h
++  // to remove ambiguity.
++  wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(
++    toolId,label,*bitmap,wxBitmapBundle(),kind,shortHelp);
+   wxeReturn rt = wxeReturn(memenv, Ecmd.caller, true);
+   rt.send(  rt.make_ref(app->getRef((void *)Result,memenv), "wx"));
+```
+
+
+fixed like so:
+
+```
+$> diff lib/wx/c_src/gen/wxe_wrapper_7.cpp{~,}
+2342c2342,2348
+<   wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(toolId,label,*bitmap,shortHelp,kind);
+---
+>   // phm fix:-
+>   // "error: call to member function 'AddTool' is ambiguous"
+>   // Using arguments that match "the full AddTool function"
+>   // as described in wxWidgets-3.1.6/include/wx-3.1/wx/tbarbase.h
+>   // to remove ambiguity.
+>   wxToolBarToolBase * Result = (wxToolBarToolBase*)This->AddTool(
+>     toolId,label,*bitmap,wxBitmapBundle(),kind,shortHelp);
+```
+
+
+
+
+
+
+## Elixir version 1.17.2
+
+```
+mkdir -p ~/Builds
+cd ~/Builds
+tar -zxf ~/Downloads/elixir-1.17.2.tar.gz
+cd elixir-1.17.2/
+
+make PREFIX=/Users/phm/Software/erlang-27.0.1
+make PREFIX=/Users/phm/Software/erlang-27.0.1 install
 ```
